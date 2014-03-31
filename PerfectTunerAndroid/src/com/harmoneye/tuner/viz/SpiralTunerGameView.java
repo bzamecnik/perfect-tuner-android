@@ -10,19 +10,16 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 import com.harmoneye.tuner.analysis.AnalyzedFrame;
-import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
 import com.harmoneye.tuner.math.Modulo;
 import com.harmoneye.tuner.math.filter.ScalarExpSmoother;
 
-public class SpiralTunerGameView extends GameView {
+public class SpiralTunerGameView extends GameView implements Visualizer<AnalyzedFrame> {
 
 	private static final double TWO_PI = 2 * Math.PI;
 	private static final double HALF_PI = 0.5 * Math.PI;
 
 	private static final String[] TONE_NAMES = { "C", "Db", "D", "Eb", "E",
 		"F", "Gb", "G", "Ab", "A", "Bb", "B" };
-
-	private ReassignedTuningAnalyzer tuningAnalyzer;
 
 	private ScalarExpSmoother errorSmoother = new ScalarExpSmoother(0.2);
 	
@@ -63,8 +60,6 @@ public class SpiralTunerGameView extends GameView {
 
 		// StopWatch watch = new StopWatch();
 		// watch.start();
-		tuningAnalyzer.update();
-		frame = tuningAnalyzer.getAnalyzedFrame();
 
 		if (frame != null) {
 			error = (float) frame.getDistToNearestTone();
@@ -144,7 +139,7 @@ public class SpiralTunerGameView extends GameView {
 		return 0.25f * (float) (1 - 2 * Math.abs(error));
 	}
 
-	public void setTuningAnalyzer(ReassignedTuningAnalyzer tuningAnalyzer) {
-		this.tuningAnalyzer = tuningAnalyzer;
+	public void update(AnalyzedFrame frame) {
+		this.frame = frame;
 	}
 }

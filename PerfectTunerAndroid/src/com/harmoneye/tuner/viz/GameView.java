@@ -33,7 +33,7 @@ public abstract class GameView extends SurfaceView implements
 	private void update() {
 		long now = System.currentTimeMillis();
 		timeDelta = 0.001f * (time > 0 ? now - time : 0);
-		//Log.i("", "time delta:" + timeDelta + ", fps: " + (1.0/timeDelta));
+		// Log.i("", "time delta:" + timeDelta + ", fps: " + (1.0/timeDelta));
 		if (timeDelta != 0 && fpsCounter != null) {
 			fpsCounter.updateFps(1.0 / timeDelta);
 		}
@@ -53,34 +53,7 @@ public abstract class GameView extends SurfaceView implements
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		drawingThread = new Thread(new Runnable() {
-			public void run() {
-				while (!Thread.currentThread().isInterrupted()) {
-					update();
-					Canvas canvas = null;
-					try {
-						canvas = surfaceHolder.lockCanvas();
-						if (canvas != null) {
-							onRender(canvas);
-						}
-					} finally {
-						if (canvas != null) {
-							surfaceHolder.unlockCanvasAndPost(canvas);
-						}
-					}
-
-					long now = System.currentTimeMillis();
-					float sleepTime = (time - now) + MIN_DT;
-					if (sleepTime > 0) {
-						try {
-							Thread.sleep((long) sleepTime);
-						} catch (InterruptedException e) {
-							Log.i(LOG_TAG, "SurfaceView thread interrupted");
-						}
-					}
-				}
-			}
-		});
+		drawingThread = new DrawingThread();
 		drawingThread.start();
 	}
 
@@ -106,6 +79,35 @@ public abstract class GameView extends SurfaceView implements
 
 	protected float getTimeDelta() {
 		return timeDelta;
+	}
+
+	protected class DrawingThread extends Thread {
+		public void run() {
+			while (!Thread.currentThread().isInterrupted()) {
+				update();
+				Canvas canvas = null;
+				try {
+					canvas = surfaceHolder.lockCanvas();
+					if (canvas != null) {
+						onRender(canvas);
+					}
+				} finally {
+					if (canvas != null) {
+						surfaceHolder.unlockCanvasAndPost(canvas);
+					}
+				}
+
+				long now = System.currentTimeMillis();
+				float sleepTime = (time - now) + MIN_DT;
+				if (sleepTime > 0) {
+					try {
+						Thread.sleep((long) sleepTime);
+					} catch (InterruptedException e) {
+						Log.i(LOG_TAG, "SurfaceView thread interrupted");
+					}
+				}
+			}
+		}
 	}
 
 }
