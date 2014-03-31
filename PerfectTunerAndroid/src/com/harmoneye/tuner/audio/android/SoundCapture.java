@@ -10,7 +10,7 @@ import android.util.Log;
 import com.harmoneye.tuner.activity.TunerActivity;
 import com.harmoneye.tuner.audio.SoundConsumer;
 
-public class Capture implements Runnable {
+public class SoundCapture implements Runnable {
 
 	private static final String LOG_TAG = TunerActivity.LOG_TAG;
 	
@@ -36,7 +36,7 @@ public class Capture implements Runnable {
 	private double[] amplitudes;
 	private SoundConsumer soundConsumer;
 
-	public Capture(SoundConsumer soundConsumer) {
+	public SoundCapture(SoundConsumer soundConsumer) {
 		this.soundConsumer = soundConsumer;
 	}
 

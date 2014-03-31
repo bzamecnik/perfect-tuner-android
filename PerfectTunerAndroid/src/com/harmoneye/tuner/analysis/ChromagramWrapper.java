@@ -1,4 +1,4 @@
-package com.harmoneye.tuner.app.spectrogram;
+package com.harmoneye.tuner.analysis;
 
 import org.apache.commons.math3.util.FastMath;
 

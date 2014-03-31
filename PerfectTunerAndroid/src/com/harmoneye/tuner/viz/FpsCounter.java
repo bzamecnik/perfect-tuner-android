@@ -2,7 +2,7 @@ package com.harmoneye.tuner.viz;
 
 import android.widget.TextView;
 
-import com.harmoneye.tuner.analysis.ScalarExpSmoother;
+import com.harmoneye.tuner.math.filter.ScalarExpSmoother;
 
 public class FpsCounter {
 	private static final int MIN_FPS_DRAW_PERIOD_MILLIS = 200;

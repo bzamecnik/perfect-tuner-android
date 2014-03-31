@@ -1,4 +1,4 @@
-package com.harmoneye.tuner.app.spectrogram;
+package com.harmoneye.tuner.analysis;
 
 public class HarmonicCorrelation {
 

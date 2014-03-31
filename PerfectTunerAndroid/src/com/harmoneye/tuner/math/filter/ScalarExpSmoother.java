@@ -1,4 +1,4 @@
-package com.harmoneye.tuner.analysis;
+package com.harmoneye.tuner.math.filter;
 
 public class ScalarExpSmoother {
 

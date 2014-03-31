@@ -11,7 +11,7 @@ import android.view.SurfaceHolder;
 
 import com.harmoneye.tuner.analysis.AnalyzedFrame;
 import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
-import com.harmoneye.tuner.analysis.ScalarExpSmoother;
+import com.harmoneye.tuner.math.filter.ScalarExpSmoother;
 
 public class SpiralTunerGameView extends GameView {
 

@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.harmoneye.tuner.R;
 import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
-import com.harmoneye.tuner.audio.android.Capture;
+import com.harmoneye.tuner.audio.android.SoundCapture;
 import com.harmoneye.tuner.viz.SpiralTunerGameView;
 
 public class TunerActivity extends Activity {
@@ -17,7 +17,7 @@ public class TunerActivity extends Activity {
 
 	private static final int WINDOW_SIZE = 4096;
 
-	private Capture soundCapture;
+	private SoundCapture soundCapture;
 	private ReassignedTuningAnalyzer tuningAnalyzer;
 	private SpiralTunerGameView gameView;
 
@@ -33,7 +33,7 @@ public class TunerActivity extends Activity {
 		setContentView(R.layout.main);
 
 		tuningAnalyzer = new ReassignedTuningAnalyzer(WINDOW_SIZE,
-			Capture.AUDIO_SAMPLE_RATE);
+			SoundCapture.AUDIO_SAMPLE_RATE);
 
 //		TextView fpsTextView = (TextView) findViewById(R.id.fpsTextView);
 //		FpsCounter fpsCounter = new FpsCounter(fpsTextView);
@@ -51,7 +51,7 @@ public class TunerActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		if (soundCapture == null) {
-			soundCapture = new Capture(tuningAnalyzer);
+			soundCapture = new SoundCapture(tuningAnalyzer);
 		}
 		Thread thread = new Thread(soundCapture);
 		thread.start();

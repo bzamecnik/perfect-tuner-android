@@ -1,4 +1,4 @@
-package com.harmoneye.tuner.app.spectrogram;
+package com.harmoneye.tuner.analysis;
 
 import com.harmoneye.tuner.audio.DecibelCalculator;
 import com.harmoneye.tuner.math.matrix.ComplexVector;
