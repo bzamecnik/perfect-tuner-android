@@ -62,8 +62,16 @@ public class ReassignedTuningAnalyzer implements SoundConsumer {
 //		StopWatch sw = new StopWatch();
 //		sw.start();
 //		int updatedFrames = 0;
-		if (samplesRingBuffer.getCapacityForRead() > windowSize) {
-			
+		
+		while (!canProcess()) {
+			try {
+				samplesRingBuffer.awaitNotEmpty();
+			} catch (InterruptedException e) {
+				continue;
+			}
+		}
+		
+		if (canProcess()) {
 			samplesRingBuffer.read(windowSize, sampleWindow);
 			samplesRingBuffer.incrementReadIndex(hopSize);
 
@@ -96,6 +104,10 @@ public class ReassignedTuningAnalyzer implements SoundConsumer {
 		}
 //		sw.stop();
 //		Log.i("PerfectTuner", "updated frames: " + updatedFrames + " in " + sw.getTime() + " ms");
+	}
+
+	private boolean canProcess() {
+		return samplesRingBuffer.getCapacityForRead() >= windowSize;
 	}
 
 //	private void shift(double[] values) {
