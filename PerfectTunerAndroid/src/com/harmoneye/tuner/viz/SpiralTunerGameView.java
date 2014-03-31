@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 
 import com.harmoneye.tuner.analysis.AnalyzedFrame;
 import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
+import com.harmoneye.tuner.math.Modulo;
 import com.harmoneye.tuner.math.filter.ScalarExpSmoother;
 
 public class SpiralTunerGameView extends GameView {
@@ -112,7 +113,7 @@ public class SpiralTunerGameView extends GameView {
 		float aFreq = Math.abs(freq);
 		for (int i = 0; i < count; i++) {
 			float p = i / (float) count;
-			float s = (float) mod((p + (error > 0 ? 1 : -1) * t), 1);
+			float s = (float) Modulo.modulo((p + (error > 0 ? 1 : -1) * t), 1);
 			s = aFreq * s + (1 - aFreq);
 			float r = bigRadius * (0.5f + 0.5f * s);
 			float re = s * size;
@@ -137,10 +138,6 @@ public class SpiralTunerGameView extends GameView {
 		startTime = System.currentTimeMillis();
 
 		super.surfaceCreated(holder);
-	}
-
-	private double mod(double value, double base) {
-		return ((value % base) + base) % base;
 	}
 
 	private float errorHue(double error) {
