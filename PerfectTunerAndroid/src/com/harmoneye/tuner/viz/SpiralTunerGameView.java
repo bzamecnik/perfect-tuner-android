@@ -43,7 +43,7 @@ public class SpiralTunerGameView extends GameView implements Visualizer<Analyzed
 		textPaint.setStrokeWidth(3);
 		textPaint.setColor(0xFF097286);
 		textPaint.setTextAlign(Align.CENTER);
-		textPaint.setTextSize(100);
+		//textPaint.setTextSize(100);
 		textPaint.setAntiAlias(true);
 
 		beadPaint = new Paint();
@@ -103,6 +103,9 @@ public class SpiralTunerGameView extends GameView implements Visualizer<Analyzed
 		int count = 12;
 		float bigRadius = (float) (0.7 * 0.5 * Math.min(width, height));
 		float size = 0.25f * bigRadius;
+		
+		textPaint.setTextSize(0.5f * bigRadius);
+		
 		float t = secsSinceStart * 2;
 		float freq = 2 * error;
 		float aFreq = Math.abs(freq);
