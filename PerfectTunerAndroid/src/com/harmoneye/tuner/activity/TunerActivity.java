@@ -38,15 +38,12 @@ public class TunerActivity extends Activity {
 		tuningAnalyzer = new ReassignedTuningAnalyzer(WINDOW_SIZE,
 			SoundCapture.AUDIO_SAMPLE_RATE);
 
-//		TextView fpsTextView = (TextView) findViewById(R.id.fpsTextView);
-//		FpsCounter fpsCounter = new FpsCounter(fpsTextView);
+		gameView = (SpiralTunerGameView) findViewById(R.id.spiralTunerView);
 
-		LinearLayout layout = (LinearLayout) findViewById(R.id.frame);
+		// TextView fpsTextView = (TextView) findViewById(R.id.fpsTextView);
+		// FpsCounter fpsCounter = new FpsCounter(fpsTextView);
+		// gameView.setFpsCounter(fpsCounter);
 
-		gameView = new SpiralTunerGameView(getApplicationContext());
-//		gameView.setFpsCounter(fpsCounter);
-		
-		layout.addView(gameView);
 	}
 
 	@Override

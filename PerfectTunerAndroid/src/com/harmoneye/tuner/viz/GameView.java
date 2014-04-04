@@ -2,6 +2,7 @@ package com.harmoneye.tuner.viz;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -23,8 +24,8 @@ public abstract class GameView extends SurfaceView implements
 
 	private float timeDelta;
 
-	public GameView(Context context) {
-		super(context);
+	public GameView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
 
 		surfaceHolder = getHolder();
 		surfaceHolder.addCallback(this);

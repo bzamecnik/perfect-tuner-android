@@ -13,4 +13,9 @@
         android:text="FPS" />
     -->
 
+    <com.harmoneye.tuner.viz.SpiralTunerGameView
+        android:id="@+id/spiralTunerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+	
 </LinearLayout>
