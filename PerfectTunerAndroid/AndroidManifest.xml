@@ -4,6 +4,8 @@
     android:versionCode="2"
     android:versionName="0.2" >
 
+    <!-- for the ActionBar without appcompat: -->
+    <!-- android:minSdkVersion="11" -->
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
@@ -11,27 +13,38 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- Tell the system this app requires OpenGL ES 2.0. -->
-    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-    
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <!-- 
+
+        <!--
 		prevent re-creating the activity on screen rotation
 		(http://stackoverflow.com/questions/456211/activity-restart-on-rotation-android) 
 		android:configChanges="orientation|screenSize"
-		-->
+        -->
         <activity
             android:name="com.harmoneye.tuner.activity.TunerActivity"
-            android:label="@string/app_name"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.harmoneye.tuner.activity.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="com.harmoneye.tuner.activity.TunerActivity">
+            <meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="com.harmoneye.tuner.activity.TunerActivity" />
         </activity>
     </application>
 

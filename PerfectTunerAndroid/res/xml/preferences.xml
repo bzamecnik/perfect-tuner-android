@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditTextPreference
+        android:key="pref_referenceFreq"
+        android:title="@string/pref_referenceFreq"
+        android:defaultValue="@string/pref_referenceFreq_default" />
+
+</PreferenceScreen>
