@@ -7,4 +7,12 @@
     <string name="pref_referenceFreq">Reference frequency for A tone</string>
     <string name="pref_referenceFreq_default">440</string>
 
+    <string name="admob_ad_unit_id">ca-app-pub-7832870189719732/6330071008</string>
+    
+    <string-array name="admob_test_device_ids">
+        <!-- Nexus 7 -->
+        <item>4F2D091097EAD11ED7B7D6F97F3B1D2A</item>
+        <!-- HTC Desire -->
+        <item>AC81F121E22CB68FC39F8A217F0D36F0</item>
+    </string-array>
 </resources>

@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdRequest.Builder;
+import com.google.android.gms.ads.AdView;
 import com.harmoneye.tuner.R;
 import com.harmoneye.tuner.analysis.AnalysisThread;
 import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
@@ -40,6 +43,28 @@ public class TunerActivity extends Activity {
 		// FpsCounter fpsCounter = new FpsCounter(fpsTextView);
 		// gameView.setFpsCounter(fpsCounter);
 
+		prepareAd();
+	}
+
+	private void prepareAd() {
+		AdView adView = (AdView) this.findViewById(R.id.adView);
+		AdRequest adRequest = createAdRequest();
+		adView.loadAd(adRequest);
+	}
+
+	private AdRequest createAdRequest() {
+		Builder builder = new AdRequest.Builder();
+		builder.addTestDevice(AdRequest.DEVICE_ID_EMULATOR);
+		String[] admobTestDeviceIds = getResources()
+			.getStringArray(R.array.admob_test_device_ids);
+		for (String id : admobTestDeviceIds) {
+			builder.addTestDevice(id);
+		}
+		AdRequest adRequest = builder.build();
+		// TODO: explore better targetting the ads via keywords
+		// builder.addKeyword("music guitar")
+		// - eg. provide the selected instrument, etc.
+		return adRequest;
 	}
 
 	@Override
