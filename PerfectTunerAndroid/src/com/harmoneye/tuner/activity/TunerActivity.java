@@ -28,13 +28,10 @@ public class TunerActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-			WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		enableFullScreen();
 
 		setContentView(R.layout.main);
-
+		
 		tuningAnalyzer = new ReassignedTuningAnalyzer(WINDOW_SIZE,
 			SoundCapture.AUDIO_SAMPLE_RATE);
 
@@ -54,7 +51,7 @@ public class TunerActivity extends Activity {
 		}
 		Thread thread = new Thread(soundCapture);
 		thread.start();
-		
+
 		analysisThread = new AnalysisThread(tuningAnalyzer, gameView);
 		analysisThread.start();
 	}
@@ -82,4 +79,11 @@ public class TunerActivity extends Activity {
 			analysisThread.interrupt();
 		}
 	}
+	private void enableFullScreen() {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+			WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	}
+	
 }
