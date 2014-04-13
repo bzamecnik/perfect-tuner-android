@@ -12,15 +12,13 @@ import android.view.SurfaceHolder;
 
 import com.harmoneye.math.Modulo;
 import com.harmoneye.math.filter.ScalarExpSmoother;
+import com.harmoneye.music.PitchClassNamer;
 import com.harmoneye.tuner.analysis.AnalyzedFrame;
 
 public class SpiralTunerGameView extends GameView implements Visualizer<AnalyzedFrame> {
 
 	private static final double TWO_PI = 2 * Math.PI;
 	private static final double HALF_PI = 0.5 * Math.PI;
-
-	private static final String[] TONE_NAMES = { "C", "Db", "D", "Eb", "E",
-		"F", "Gb", "G", "Ab", "A", "Bb", "B" };
 
 	private ScalarExpSmoother errorSmoother = new ScalarExpSmoother(0.2);
 	
@@ -36,6 +34,8 @@ public class SpiralTunerGameView extends GameView implements Visualizer<Analyzed
 	private AnalyzedFrame frame;
 	private int selectedTone;
 	private boolean pitchDetected;
+
+	private PitchClassNamer pitchClassNamer = PitchClassNamer.defaultInstance();
 
 	public SpiralTunerGameView(Context context) {
 		this(context, null);
@@ -74,7 +74,7 @@ public class SpiralTunerGameView extends GameView implements Visualizer<Analyzed
 			error = (float) frame.getDistToNearestTone();
 			pitchDetected = frame.isPitchDetected();
 			selectedTone = (int) frame.getNearestTone();
-			toneName = (pitchDetected) ? TONE_NAMES[selectedTone] : "";
+			toneName = (pitchDetected) ? pitchClassNamer.getName(selectedTone) : "";
 		} else {
 			error = 0;
 			pitchDetected = false;
