@@ -2,12 +2,12 @@ package com.harmoneye.tuner.analysis;
 
 import org.apache.commons.math3.util.FastMath;
 
+import com.harmoneye.audio.DoubleRingBuffer;
+import com.harmoneye.audio.SoundConsumer;
+import com.harmoneye.math.MaxNorm;
+import com.harmoneye.math.Modulo;
+import com.harmoneye.math.Norm;
 import com.harmoneye.tuner.analysis.StreamingReassignedSpectrograph.OutputFrame;
-import com.harmoneye.tuner.audio.DoubleRingBuffer;
-import com.harmoneye.tuner.audio.SoundConsumer;
-import com.harmoneye.tuner.math.MaxNorm;
-import com.harmoneye.tuner.math.Modulo;
-import com.harmoneye.tuner.math.Norm;
 
 public class ReassignedTuningAnalyzer implements SoundConsumer {
 

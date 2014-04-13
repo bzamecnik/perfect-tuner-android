@@ -10,9 +10,9 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 
+import com.harmoneye.math.Modulo;
+import com.harmoneye.math.filter.ScalarExpSmoother;
 import com.harmoneye.tuner.analysis.AnalyzedFrame;
-import com.harmoneye.tuner.math.Modulo;
-import com.harmoneye.tuner.math.filter.ScalarExpSmoother;
 
 public class SpiralTunerGameView extends GameView implements Visualizer<AnalyzedFrame> {
 
@@ -91,6 +91,8 @@ public class SpiralTunerGameView extends GameView implements Visualizer<Analyzed
 	protected void onRender(Canvas canvas) {
 		canvas.drawColor(Color.WHITE);
 
+		// TODO: do the size calculations only in the onSizeChanged() method
+		
 		int width = canvas.getWidth();
 		int height = canvas.getHeight();
 		

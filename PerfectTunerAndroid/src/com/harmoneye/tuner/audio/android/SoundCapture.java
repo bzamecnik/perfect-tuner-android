@@ -7,8 +7,8 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
 
+import com.harmoneye.audio.SoundConsumer;
 import com.harmoneye.tuner.activity.TunerActivity;
-import com.harmoneye.tuner.audio.SoundConsumer;
 
 public class SoundCapture implements Runnable {
 
