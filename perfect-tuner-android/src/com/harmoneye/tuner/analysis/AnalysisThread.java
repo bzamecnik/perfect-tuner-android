@@ -17,8 +17,8 @@ public class AnalysisThread extends Thread {
 	public void run() {
 		while (!Thread.currentThread().isInterrupted()) {
 			// this will wait until enough data is available
-			tuningAnalyzer.update();
-			visualizer.update(tuningAnalyzer.getAnalyzedFrame());
+			AnalyzedFrame frame = tuningAnalyzer.analyze();
+			visualizer.update(frame);
 		}
 	}
 }
