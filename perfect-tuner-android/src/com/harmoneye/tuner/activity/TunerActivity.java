@@ -8,10 +8,12 @@ import android.view.WindowManager;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdRequest.Builder;
 import com.google.android.gms.ads.AdView;
+import com.harmoneye.audio.android.AudioRecordDiscovery;
+import com.harmoneye.audio.android.AudioRecordDiscovery.AudioRecordParams;
+import com.harmoneye.audio.android.SoundCapture;
 import com.harmoneye.tuner.R;
 import com.harmoneye.tuner.analysis.AnalysisThread;
 import com.harmoneye.tuner.analysis.ReassignedTuningAnalyzer;
-import com.harmoneye.tuner.audio.android.SoundCapture;
 import com.harmoneye.tuner.viz.SpiralTunerGameView;
 
 public class TunerActivity extends Activity {
@@ -32,9 +34,13 @@ public class TunerActivity extends Activity {
 
 		setContentView(R.layout.main);
 
+		AudioRecordParams audioRecordParams = new AudioRecordDiscovery()
+			.findParams();
 
 		tuningAnalyzer = new ReassignedTuningAnalyzer(
 			audioRecordParams.getSampleRate());
+
+		soundCapture = new SoundCapture(tuningAnalyzer, audioRecordParams);
 
 		gameView = (SpiralTunerGameView) findViewById(R.id.spiralTunerView);
 
@@ -69,9 +75,6 @@ public class TunerActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (soundCapture == null) {
-			soundCapture = new SoundCapture(tuningAnalyzer);
-		}
 		Thread thread = new Thread(soundCapture);
 		thread.start();
 
@@ -83,8 +86,7 @@ public class TunerActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		gameView.pause();
-
-		if (soundCapture != null) {
+		if (soundCapture.isRunning()) {
 			soundCapture.stop();
 		}
 		if (analysisThread != null) {
@@ -95,7 +97,7 @@ public class TunerActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (soundCapture != null) {
+		if (soundCapture.isRunning()) {
 			soundCapture.stop();
 		}
 		if (analysisThread != null) {
