@@ -22,7 +22,7 @@ public class ReassignedTuningAnalyzer implements SoundConsumer,
 	private Norm maxNorm = new MaxNorm();
 
 	private double sampleRate;
-	private int windowSize;
+	private int windowSize = WINDOW_SIZE;
 	private int hopSize;
 	// private int historySize;
 
@@ -32,8 +32,7 @@ public class ReassignedTuningAnalyzer implements SoundConsumer,
 	// private double[] errorHistory;
 	private double[] sampleWindow;
 
-	public ReassignedTuningAnalyzer(int windowSize, double sampleRate) {
-		this.windowSize = windowSize;
+	public ReassignedTuningAnalyzer(double sampleRate) {
 		this.sampleRate = sampleRate;
 		spectrograph = new StreamingReassignedSpectrograph(windowSize,
 			sampleRate);

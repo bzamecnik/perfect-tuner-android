@@ -18,8 +18,6 @@ public class TunerActivity extends Activity {
 
 	public static final String LOG_TAG = "PerfectTuner";
 
-	private static final int WINDOW_SIZE = 4096;
-
 	private SoundCapture soundCapture;
 	private ReassignedTuningAnalyzer tuningAnalyzer;
 	private SpiralTunerGameView gameView;
@@ -33,9 +31,10 @@ public class TunerActivity extends Activity {
 		enableFullScreen();
 
 		setContentView(R.layout.main);
-		
-		tuningAnalyzer = new ReassignedTuningAnalyzer(WINDOW_SIZE,
-			SoundCapture.AUDIO_SAMPLE_RATE);
+
+
+		tuningAnalyzer = new ReassignedTuningAnalyzer(
+			audioRecordParams.getSampleRate());
 
 		gameView = (SpiralTunerGameView) findViewById(R.id.spiralTunerView);
 
